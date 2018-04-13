@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.mycompany.mavenproject1.data.Country;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +12,13 @@ import java.util.HashSet;
 
 public class CountryDAO {
 
-    private String dbURL = "jdbc:mysql://localhost:3306/saapp";
-    private String username = "root";
-    private String password = "gabriel";
-
     public void create(Country country) throws Exception {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
+        
+        try {
+            
             String sql = "INSERT INTO country (name, acronym, digits) VALUES (?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -36,10 +35,12 @@ public class CountryDAO {
         } catch (SQLException ex) {
             throw new Exception(ex);
 
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 
-    public Country readById(int id) {
+    public Country readById(int id) throws Exception {
         return this.readAll().
                 stream().
                 filter(
@@ -48,7 +49,7 @@ public class CountryDAO {
                 get();
     }
 
-    public Country readByAcronym(String acronym) {
+    public Country readByAcronym(String acronym) throws Exception {
         return this.readAll().
                 stream().
                 filter(
@@ -58,7 +59,7 @@ public class CountryDAO {
                 get();
     }
 
-    public Country readByName(String name) {
+    public Country readByName(String name) throws Exception {
         return this.readAll().
                 stream().
                 filter(
@@ -68,11 +69,15 @@ public class CountryDAO {
                 get();
     }
 
-    public Set<Country> readAll() {
+    public Set<Country> readAll() throws Exception {
         Set<Country> resultSet = new HashSet<>();
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
 
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+        try {
+            
+            
             String sql = "SELECT * FROM country";
 
             Statement statement = conn.createStatement();
@@ -90,14 +95,20 @@ public class CountryDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
 
+        }finally{
+            singleton.closeConecction(conn);
         }
 
         return resultSet;
     }
 
-    public void update(Country newCountry, String name) {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+    public void update(Country newCountry, String name) throws Exception {
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
+        
+        try {           
+            
             String sql = "UPDATE country SET name=?, acronym=?, digits=? WHERE name like ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -115,12 +126,18 @@ public class CountryDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
 
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 
-    public void delete(String name) {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+    public void delete(String name) throws Exception {
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
+        
+        try {
+            
             String sql = "DELETE FROM country WHERE name like ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -135,6 +152,8 @@ public class CountryDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
 
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 

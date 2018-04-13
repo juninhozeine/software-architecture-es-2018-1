@@ -4,23 +4,26 @@ import java.util.Set;
 
 import com.mycompany.mavenproject1.data.Customer;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomerDAO {
 
-    private String dbURL = "jdbc:mysql://localhost:3306/saapp";
-    private String username = "root";
-    private String password = "gabriel";
+    
 
     public void create(Customer customer) throws Exception {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
-            String sql = "INSERT INTO customer (name, phone, age, country_id, creditLimit) VALUES (?, ?, ?, ?, ?)";
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
+        
+        try {
+           
+           String sql = "INSERT INTO customer (name, phone, age, country_id, creditLimit) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, customer.getName());
@@ -34,14 +37,15 @@ public class CustomerDAO {
             if (rowsInserted == 0) {
                 throw new RuntimeException("Customer could not be persisted!");
             }
-
-        } catch (SQLException ex) {
+        }catch(SQLException ex){
             throw new Exception(ex);
-
+            
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 
-    public Customer readById(int id) {
+    public Customer readById(int id) throws Exception {
         return this.readAll().
                 stream().
                 filter(
@@ -50,7 +54,7 @@ public class CustomerDAO {
                 get();
     }
 
-    public Customer readByName(String name) {
+    public Customer readByName(String name) throws Exception {
         return this.readAll().
                 stream().
                 filter(
@@ -60,12 +64,15 @@ public class CustomerDAO {
                 get();
     }
 
-    public Set<Customer> readAll() {
+    public Set<Customer> readAll() throws Exception {
 
         Set<Customer> resultSet = new HashSet<>();
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
 
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+        try {
+            
             String sql = "SELECT * FROM customer";
 
             Statement statement = conn.createStatement();
@@ -90,14 +97,20 @@ public class CustomerDAO {
             System.out.println(ex);
 
         } catch (Exception ex) {
-            // Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            singleton.closeConecction(conn);
         }
 
         return resultSet;
     }
 
     public void update(Customer newCustomer, String name) throws Exception {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();  
+        
+        try {
 
             String sql = "UPDATE customer SET name=?, age=?, country_id=?, phone=?, creditLimit=? WHERE name like ?";
 
@@ -117,13 +130,18 @@ public class CustomerDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex);
-
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 
-    public void delete(String name) {
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
+    public void delete(String name) throws Exception {
+        
+        SingletonConnection singleton = SingletonConnection.getIntance();
+        Connection conn = singleton.getConnection();
+        
+        try {
+            
             String sql = "DELETE FROM customer WHERE name like ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -138,6 +156,8 @@ public class CustomerDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
 
+        }finally{
+            singleton.closeConecction(conn);
         }
     }
 
