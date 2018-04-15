@@ -7,6 +7,8 @@ package com.mycompany.mavenproject1.ui;
 
 import com.mycompany.mavenproject1.dao.CountryDAO;
 import com.mycompany.mavenproject1.dao.CustomerDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -71,7 +73,11 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_countrybtActionPerformed
 
     private void customerbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerbtActionPerformed
-        new CustomerUI(customerDAO, countryDAO).setVisible(true);
+        try {
+            new CustomerUI(customerDAO, countryDAO).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_customerbtActionPerformed
 
     /**

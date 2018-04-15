@@ -9,6 +9,8 @@ import com.mycompany.mavenproject1.dao.CountryDAO;
 import com.mycompany.mavenproject1.dao.CustomerDAO;
 import com.mycompany.mavenproject1.data.Country;
 import com.mycompany.mavenproject1.data.Customer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +31,7 @@ public class CustomerUI extends javax.swing.JFrame {
         initComponents();
     }
 
-    CustomerUI(CustomerDAO customerDAO, CountryDAO countryDAO) {
+    CustomerUI(CustomerDAO customerDAO, CountryDAO countryDAO) throws Exception {
         this();
 
         this.customerDAO = customerDAO;
@@ -126,7 +128,11 @@ public class CustomerUI extends javax.swing.JFrame {
 
     private void listbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listbtActionPerformed
 
-        listarea.setText(customerDAO.readAll().toString());
+        try {
+            listarea.setText(customerDAO.readAll().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_listbtActionPerformed
 
     private void nametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nametxtActionPerformed
@@ -170,10 +176,14 @@ public class CustomerUI extends javax.swing.JFrame {
 
     private void countrycomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countrycomboActionPerformed
 
-        for (Country currentCountry : countryDAO.readAll()) {
-            if (currentCountry.getName().equalsIgnoreCase((String) countrycombo.getSelectedItem())) {
-                selectedCountry = currentCountry;
+        try {
+            for (Country currentCountry : countryDAO.readAll()) {
+                if (currentCountry.getName().equalsIgnoreCase((String) countrycombo.getSelectedItem())) {
+                    selectedCountry = currentCountry;
+                }
             }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_countrycomboActionPerformed
 

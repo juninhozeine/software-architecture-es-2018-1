@@ -11,7 +11,7 @@ public class CustomerDAOTest {
 
     private CustomerDAO dao = new CustomerDAO();
 
-    public Customer createEntity() {
+    public Customer createEntity() throws Exception {
         
 //        CountryDAOTest daoTest = new CountryDAOTest();
 //        daoTest.persistEntity();
@@ -46,7 +46,7 @@ public class CustomerDAOTest {
         return c;
     }
 
-    public void persistEntity() {
+    public void persistEntity() throws Exception {
         Customer c = createEntity();
 
         try {
@@ -88,7 +88,7 @@ public class CustomerDAOTest {
 //    }
 //
     @Test
-    public void delete() {
+    public void delete() throws Exception {
         dao.delete("Andrew");
 
         Assert.assertTrue(dao.readAll().size() == 0);

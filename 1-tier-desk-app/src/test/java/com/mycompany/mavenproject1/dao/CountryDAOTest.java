@@ -34,7 +34,7 @@ public class CountryDAOTest {
     }
 
     // @After
-    public void deleteEntity() {
+    public void deleteEntity() throws Exception {
         dao.delete("Brazil");
         
     }

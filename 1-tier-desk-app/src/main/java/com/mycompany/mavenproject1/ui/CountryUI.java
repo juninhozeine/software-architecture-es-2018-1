@@ -7,6 +7,8 @@ package com.mycompany.mavenproject1.ui;
 
 import com.mycompany.mavenproject1.dao.CountryDAO;
 import com.mycompany.mavenproject1.data.Country;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -99,7 +101,11 @@ public class CountryUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listbtActionPerformed
-        listarea.setText(countryDAO.readAll().toString());
+        try {
+            listarea.setText(countryDAO.readAll().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(CountryUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_listbtActionPerformed
 
     private void createbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createbtActionPerformed
