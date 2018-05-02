@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_na5bMDzKEeiuB9nq-1IMpw" name="ArchitectureDescription">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_nxNpcDzKEeiuB9nq-1IMpw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_70fxkDzKEeiuB9nq-1IMpw" client="_qvHlADzKEeiuB9nq-1IMpw" supplier="_6Tpp4DzKEeiuB9nq-1IMpw"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_8hXeoDzKEeiuB9nq-1IMpw" client="_qvHlADzKEeiuB9nq-1IMpw" supplier="_4FphQDzKEeiuB9nq-1IMpw"/>
+  <packagedElement xmi:type="uml:Node" xmi:id="_BrZTgDzLEeiuB9nq-1IMpw" name="Desktop">
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_qvHlADzKEeiuB9nq-1IMpw" name="App.jar" fileName=""/>
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_6Tpp4DzKEeiuB9nq-1IMpw" name="MySQL Driver"/>
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_4FphQDzKEeiuB9nq-1IMpw" name="JDBC"/>
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_H5ktADzLEeiuB9nq-1IMpw" name="MySQL DB - SAAPP"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_R3V9sDzLEeiuB9nq-1IMpw" name="Connect" client="_qvHlADzKEeiuB9nq-1IMpw" supplier="_H5ktADzLEeiuB9nq-1IMpw"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_fnLKwDzLEeiuB9nq-1IMpw" name="ui">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_nBbV0DzLEeiuB9nq-1IMpw" client="_fnLKwDzLEeiuB9nq-1IMpw" supplier="_g7w_IDzLEeiuB9nq-1IMpw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_o7B7wDzLEeiuB9nq-1IMpw" client="_fnLKwDzLEeiuB9nq-1IMpw" supplier="_jNIk0DzLEeiuB9nq-1IMpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_g7w_IDzLEeiuB9nq-1IMpw" name="dao">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_pZzicDzLEeiuB9nq-1IMpw" client="_na5bMDzKEeiuB9nq-1IMpw" supplier="_jNIk0DzLEeiuB9nq-1IMpw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_jNIk0DzLEeiuB9nq-1IMpw" name="data"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_FiDmkDzMEeiuB9nq-1IMpw" name="dao"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_GCqZQDzMEeiuB9nq-1IMpw" name="data"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_GrWw8DzMEeiuB9nq-1IMpw" name="ui"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_RYKR4DzMEeiuB9nq-1IMpw" name="Country">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Vj4rcDzMEeiuB9nq-1IMpw" name="id" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Model>

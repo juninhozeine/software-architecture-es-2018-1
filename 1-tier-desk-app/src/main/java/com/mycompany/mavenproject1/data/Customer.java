@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Customer {
     
+    private int id;
     private String name;
     private int age;
     private String phone;
@@ -13,6 +14,14 @@ public class Customer {
     public Customer() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -37,12 +46,9 @@ public class Customer {
         return phone;
     }
 
-    public void setPhone(String phone) throws Exception {
-        if (phone.length() != this.getCountry().getDigits())
-            throw new Exception ("The phone number is not valid!");
-            
-        else
-            this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
+        
     }
 
     public Country getCountry() {
@@ -54,19 +60,8 @@ public class Customer {
     }
 
     public void setCreditLimit(double creditLimit) {
-        
-        if (this.getAge() > 35)
-            this.creditLimit = 500;
-        
-        else if (this.getAge() > 18)
-            this.creditLimit = 300;
-        
-        else
-            this.creditLimit = 100;
-        
-        
-        if (this.getCountry().getAcronym().equalsIgnoreCase("BR"))
-            this.creditLimit += 100;
+        this.creditLimit = creditLimit;
+ 
     }
     
 

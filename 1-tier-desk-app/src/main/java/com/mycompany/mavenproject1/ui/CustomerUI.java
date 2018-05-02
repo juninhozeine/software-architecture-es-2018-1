@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.mavenproject1.ui;
 
+import com.mycompany.mavenproject1.business.CountryBusiness;
+import com.mycompany.mavenproject1.business.CustomerBusiness;
 import com.mycompany.mavenproject1.data.Country;
 import com.mycompany.mavenproject1.data.Customer;
-import com.mycompany.mavenproject1.database.CountryDatabase;
-import com.mycompany.mavenproject1.database.CustomerDatabase;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author gabriel
- */
 public class CustomerUI extends javax.swing.JFrame {
 
-    private CustomerDatabase customerDB;
-    private CountryDatabase countryDB;
+    private CountryBusiness countryBusiness;
+    private CustomerBusiness customerBusiness;
+    
     private Country selectedCountry;
 
     /**
@@ -29,13 +20,13 @@ public class CustomerUI extends javax.swing.JFrame {
         initComponents();
     }
 
-    CustomerUI(CustomerDatabase customerDB, CountryDatabase countryDB) {
+    CustomerUI(CustomerBusiness customerBusiness, CountryBusiness countryBusiness) {
         this();
 
-        this.customerDB = customerDB;
-        this.countryDB = countryDB;
+        this.customerBusiness = customerBusiness;
+        this.countryBusiness = countryBusiness;
 
-        this.countryDB.list().forEach(item -> countrycombo.addItem(item.getName()));
+        this.countryBusiness.readAll().forEach(item -> countrycombo.addItem(item.getName()));
     }
 
     /**
@@ -126,7 +117,7 @@ public class CustomerUI extends javax.swing.JFrame {
 
     private void listbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listbtActionPerformed
 
-        listarea.setText(customerDB.list().toString());
+        listarea.setText(customerBusiness.readAll().toString());
     }//GEN-LAST:event_listbtActionPerformed
 
     private void nametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nametxtActionPerformed
@@ -161,7 +152,7 @@ public class CustomerUI extends javax.swing.JFrame {
         c.setCreditLimit(0);
 
         try {
-            customerDB.create(c);
+            customerBusiness.create(c);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -170,7 +161,7 @@ public class CustomerUI extends javax.swing.JFrame {
 
     private void countrycomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countrycomboActionPerformed
 
-        for (Country currentCountry : countryDB.list()) {
+        for (Country currentCountry : countryBusiness.readAll()) {
             if (currentCountry.getName().equalsIgnoreCase((String) countrycombo.getSelectedItem())) {
                 selectedCountry = currentCountry;
             }

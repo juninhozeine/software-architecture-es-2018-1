@@ -4,11 +4,29 @@ import java.util.Objects;
 
 public class Country {
     
+    private int id;
     private String name;
     private String acronym;
     private int digits;
 
     public Country() {
+    }
+    
+    public Country (int id, String name, String acronym, int digits) {
+        this();
+        
+        this.setId(id);
+        this.setName(name);
+        this.setAcronym(acronym);
+        this.setDigits(digits);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

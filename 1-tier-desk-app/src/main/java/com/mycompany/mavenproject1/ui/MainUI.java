@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.mavenproject1.ui;
 
-import com.mycompany.mavenproject1.database.CountryDatabase;
-import com.mycompany.mavenproject1.database.CustomerDatabase;
+import com.mycompany.mavenproject1.business.CountryBusiness;
+import com.mycompany.mavenproject1.business.CustomerBusiness;
 
-/**
- *
- * @author gabriel
- */
+
 public class MainUI extends javax.swing.JFrame {
 
-    private CustomerDatabase customerDB;
-    private CountryDatabase countryDB;
-    
+    private CustomerBusiness customerBusiness;
+    private CountryBusiness countryBusiness;
+
     /**
      * Creates new form MainWindow
      */
     public MainUI() {
         initComponents();
-        
-        customerDB = new CustomerDatabase();
-        countryDB = new CountryDatabase();
+
+        customerBusiness = new CustomerBusiness();
+        countryBusiness = new CountryBusiness();
     }
 
     /**
@@ -64,11 +56,11 @@ public class MainUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void countrybtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countrybtActionPerformed
-        new CountryUI(countryDB).setVisible(true);
+        new CountryUI(countryBusiness).setVisible(true);
     }//GEN-LAST:event_countrybtActionPerformed
 
     private void customerbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerbtActionPerformed
-        new CustomerUI(customerDB, countryDB).setVisible(true);
+        new CustomerUI(customerBusiness, countryBusiness).setVisible(true);
     }//GEN-LAST:event_customerbtActionPerformed
 
     /**
